@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
-public class RobotServiceTest {
+class RobotServiceTest {
     @Autowired
     RobotService robotService;
     @Test
-    public void testMovement(){
+    void testMovement(){
         final HashMap<String, String> moveCases = new HashMap<>();
 
         int x1, y1;
@@ -53,7 +53,7 @@ public class RobotServiceTest {
         }
     }
     @Test
-    public void testTurn(){
+    void testTurn(){
         final HashMap<String, String> turnCases = new HashMap<>();
         for (Direction dir : Direction.values()) {
             switch (dir) {
@@ -84,7 +84,7 @@ public class RobotServiceTest {
     }
 
     @Test
-    public void testMissRobot(){
+    void testMissRobot(){
         Assertions.assertEquals(List.of("Output: ROBOT MISSING"),
                 robotService.processCommand("left move report"));
         Assertions.assertEquals(List.of("Output: ROBOT MISSING", "Output: ROBOT MISSING"),
@@ -94,14 +94,15 @@ public class RobotServiceTest {
     }
 
     @Test
-    public void testNoReport(){
+    void testNoReport(){
         Assertions.assertEquals(List.of(),
                 robotService.processCommand("place 1,1,east left move"));
         Assertions.assertEquals(List.of("Output: ROBOT MISSING"),
                 robotService.processCommand("left move right report place 1,1,east left move"));
     }
 
-    @Test void testPlaceWrong(){
+    @Test
+    void testPlaceWrong(){
         Assertions.assertEquals(List.of("Output: Illegal place param (1,1,XREST)", "Output: ROBOT MISSING"),
                 robotService.processCommand("place 1,1,xrest report"));
         Assertions.assertEquals(List.of("Output: Illegal place param (1,5,EAST)", "Output: ROBOT MISSING"),
