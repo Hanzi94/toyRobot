@@ -20,8 +20,8 @@ class RobotServiceTest {
     @Test
     void testMovement(){
         final HashMap<String, String> moveCases = new HashMap<>();
-
         int x1, y1;
+        // test all movement cases
         for(int x = Robot.MIN_VALUE; x <= Robot.MAX_VALUE; x++){
             for(int y = Robot.MIN_VALUE; y <= Robot.MAX_VALUE; y++){
                 for (Direction dir : Direction.values()) {
@@ -55,6 +55,7 @@ class RobotServiceTest {
     @Test
     void testTurn(){
         final HashMap<String, String> turnCases = new HashMap<>();
+        // test all turning cases
         for (Direction dir : Direction.values()) {
             switch (dir) {
                 case NORTH -> {
@@ -85,33 +86,48 @@ class RobotServiceTest {
 
     @Test
     void testMissRobot(){
+        // test no place robot report once
         Assertions.assertEquals(List.of("Output: ROBOT MISSING"),
                 robotService.processCommand("left move report"));
+        // test no place robot report twice
         Assertions.assertEquals(List.of("Output: ROBOT MISSING", "Output: ROBOT MISSING"),
                 robotService.processCommand("left move report right report"));
+        // test no place for first and second report but placed for 3td report
         Assertions.assertEquals(List.of("Output: ROBOT MISSING", "Output: ROBOT MISSING", "Output: 1,1,EAST"),
                 robotService.processCommand("left move report right report place 1,1,east report"));
     }
 
     @Test
     void testNoReport(){
+        // place, turn, and move but no report
         Assertions.assertEquals(List.of(),
                 robotService.processCommand("place 1,1,east left move"));
+        // no place for first report and no report after place, turn and move
         Assertions.assertEquals(List.of("Output: ROBOT MISSING"),
                 robotService.processCommand("left move right report place 1,1,east left move"));
     }
 
     @Test
     void testPlaceWrong(){
+        int max = Robot.MAX_VALUE + 1;
+        int min = Robot.MIN_VALUE - 1;
+        // test place face wrong
         Assertions.assertEquals(List.of("Output: Illegal place param (1,1,XREST)", "Output: ROBOT MISSING"),
                 robotService.processCommand("place 1,1,xrest report"));
-        Assertions.assertEquals(List.of("Output: Illegal place param (1,5,EAST)", "Output: ROBOT MISSING"),
-                robotService.processCommand("place 1,5,east report"));
-        Assertions.assertEquals(List.of("Output: Illegal place param (1,-1,EAST)", "Output: ROBOT MISSING"),
-                robotService.processCommand("place 1,-1,east report"));
-        Assertions.assertEquals(List.of("Output: Illegal place param (-1,4,EAST)", "Output: ROBOT MISSING"),
+
+        // test x < minimum
+        Assertions.assertEquals(List.of("Output: Illegal place param (" + min + ",4,EAST)", "Output: ROBOT MISSING"),
                 robotService.processCommand("place -1,4,east report"));
-        Assertions.assertEquals(List.of("Output: Illegal place param (5,1,EAST)", "Output: ROBOT MISSING"),
+        // test x > maximum
+        Assertions.assertEquals(List.of("Output: Illegal place param (" + max + ",1,EAST)", "Output: ROBOT MISSING"),
                 robotService.processCommand("place 5,1,east report"));
+
+        // test y < minimum
+        Assertions.assertEquals(List.of("Output: Illegal place param (1," + min + ",EAST)", "Output: ROBOT MISSING"),
+                robotService.processCommand("place 1,-1,east report"));
+        // test y > maximum
+        Assertions.assertEquals(List.of("Output: Illegal place param (1," + max + ",EAST)", "Output: ROBOT MISSING"),
+                robotService.processCommand("place 1,5,east report"));
+
     }
 }

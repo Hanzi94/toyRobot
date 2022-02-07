@@ -1,11 +1,25 @@
 package com.challenge.robot.model;
 
+/**
+ * Entity of a toy robot
+ */
 public class Robot {
     public static final int MAX_VALUE = 4;
     public static final int MIN_VALUE = 0;
 
+    /**
+     * the face of this robot
+     */
     private Direction face;
+
+    /**
+     * the x coordinate on the table
+     */
     private int x;
+
+    /**
+     * the y coordinate on the table
+     */
     private int y;
 
     public Robot(int x, int y, Direction face) {

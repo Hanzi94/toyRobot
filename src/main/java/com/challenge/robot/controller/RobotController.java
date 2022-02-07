@@ -6,6 +6,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * The rest api for toy robot with command set string for commands split with white space:
+ *      PLACE X,Y,F
+ *      MOVE
+ *      LEFT
+ *      RIGHT
+ *      REPORT
+ */
 @RestController
 public class RobotController {
     private final RobotService robotService;
