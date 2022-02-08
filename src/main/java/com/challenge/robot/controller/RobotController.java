@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The rest api for toy robot with command set string for commands split with white space:
@@ -23,7 +24,7 @@ public class RobotController {
     }
 
     @GetMapping("/")
-    public List<String>processCommand(@RequestParam(value = "command") String command){
+    public Map<String, List<String>> processCommand(@RequestParam(value = "command") String command){
         return robotService.processCommand(command);
     }
 }
