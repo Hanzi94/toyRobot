@@ -118,6 +118,7 @@ public class RobotService {
      * rotate the robot 90 degrees to LEFT or RIGHT in the specified direction without changing the position of the robot
      * @param robot The robot will be rotated
      * @param turnDir The turning direction
+     * @param commandIndex the index of the command from command set (start from 1)
      */
     private void turn(Robot robot, TurnDirection turnDir, List<String>error, int commandIndex){
         if(robot != null){
@@ -141,6 +142,7 @@ public class RobotService {
      * Move the toy robot one unit forward in the direction it is currently facing
      * @param robot the robot will be moved
      * @param error the error message buffer
+     * @param index the index of the command from command set (start from 1)
      */
     private void move(Robot robot, List<String>error, int index){
         if(robot != null){
