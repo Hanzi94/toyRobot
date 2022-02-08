@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "6702360f-7ad6-47dc-afb8-8565e94b27a1",
+		"name": "robot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/?command=place 1,2,north report move report left report move report kjfks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "place 1,2,north report move report left report move report kjfks"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
